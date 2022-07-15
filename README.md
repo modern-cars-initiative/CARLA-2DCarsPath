@@ -161,7 +161,7 @@ This is the automatic player.
 
 To create your own ZIP file access the following link that will take you to the repository of the software that is required for its creation and follow the steps described there.
 
- - [Create ZIP software]() !!!LINK
+ - [Create ZIP software](https://github.com/FranciscoG001/CARLA-EgoVehicle-Simulation2Xlsx)
 
 # What can be improved
 
