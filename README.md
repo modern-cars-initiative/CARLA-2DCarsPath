@@ -121,7 +121,7 @@ $ python3.7 -m pip install -r requirements.txt
 
 Using the mouse it is possible to click on two points on the screen and see the distance between them.
 
-![Screen distance Image](../IMGReadme/ScreenDistance.gif)
+![Screen distance Image](./IMG/ScreenDistance.gif)
 
 **This feature, to get correct values, should only be used between points on the same car path**
 
@@ -131,31 +131,31 @@ Using the mouse it is possible to click on two points on the screen and see the 
 
 This is the first window you will see when run the software.
 
-![Initial Image](../IMGReadme/Initial.png)
+![Initial Image](./IMG/Initial.png)
 
 ## Normal mode
 
 This is the normal mode, where you can see all path of both cars.
 
-![Normal mode Image](../IMGReadme/NormalMode.png)
+![Normal mode Image](./IMG/NormalMode.png)
 
 ## Edit mode
 
 This is the edit mode, where you can control the position of cars on path.
 
-![Edit mode Image](../IMGReadme/EditMode.png)
+![Edit mode Image](./IMG/EditMode.png)
 
 ## Info cars in a certain position 
 
 This is the information you can see about the two cars on a certain position.
 
-![Info cars Image](../IMGReadme/InfoCars.png)
+![Info cars Image](./IMG/InfoCars.png)
 
 ### Automatic play
 
 This is the automatic player.
 
-![Auto Play Image](../IMGReadme/PlayP.gif)
+![Auto Play Image](./IMG/PlayP.gif)
 
 # Creating your own ZIP file 
 
