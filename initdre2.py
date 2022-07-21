@@ -35,9 +35,9 @@ def okfiles():
                 for ext in checkfileexts:
                     if name.endswith(ext):
                         checkfiles = True
-                        zips = ZipFile(file[0], 'r')
-                        zipfiles = zips.namelist()
-                        zips.extractall(".")
+                        with ZipFile(file[0], 'r') as zips:
+                            zipfiles = zips.namelist()
+                            zips.extractall(".")
                         root.destroy()
                         return zipfiles
                     else:
