@@ -1,4 +1,7 @@
 """Global functions dre2 file"""
+# pylint: disable=no-member
+# Up line to ignore pygame
+# pylint: disable=line-too-long
 import math
 import pygame
 
@@ -22,9 +25,9 @@ def distancia2d(xval1,yval1,xval2,yval2):
     yval = yval2 - yval1
     return round(math.sqrt(math.pow(xval, 2) + math.pow(yval, 2)),1)
 
-def screendistance(screenin, readx, ready, readx2, ready2, colorin, fontin, i):
+def screendistance(screenin, data1, data2, colorin, fontin, i):
     """Distance"""
-    distance = distancia2d(readx[i],ready[i],readx2[i],ready2[i])
+    distance = distancia2d(data1['readx'][i],data1['ready'][i],data2['readx'][i],data2['ready'][i])
     textdistancia = fontin.render(f"Distance between the cars is: {distance}", False, colorin)
     screenin.blit(textdistancia, (0,670))
 
@@ -77,15 +80,15 @@ def distancemouseclick(screenin, colorin, fontin, pos1, pos2):
     showdistance = fontin.render(str(textdistance), False, colorin)
     screenin.blit(showdistance, (newx,newy))
 
-def forplay(screenin, readx, ready, readx2, ready2, image1, image2, center_origin, center_origin2, addplay):
+def forplay(screenin, data1, data2, image1, image2, center_origin, center_origin2, addplay):
     """Loop press P"""
     for j in range(0, addplay):
         if j != addplay-1:
-            screenin.blit(image2, center_origin([readx[j], ready[j]]))
-            screenin.blit(image2, center_origin2([readx2[j], ready2[j]]))
+            screenin.blit(image2, center_origin([data1['readx'][j], data1['ready'][j]]))
+            screenin.blit(image2, center_origin2([data2['readx'][j], data2['ready'][j]]))
         else:
-            screenin.blit(image1, center_origin([readx[j], ready[j]]))
-            screenin.blit(tint(image1,(124,252,0)), center_origin2([readx2[j], ready2[j]]))
+            screenin.blit(image1, center_origin([data1['readx'][j], data1['ready'][j]]))
+            screenin.blit(tint(image1,(124,252,0)), center_origin2([data2['readx'][j], data2['ready'][j]]))
 
 def infoscreen(screenin, textinfocontroltickin, textchangetickvaluein, textplayin):
     """Some info on screen"""
@@ -93,73 +96,49 @@ def infoscreen(screenin, textinfocontroltickin, textchangetickvaluein, textplayi
     screenin.blit(textchangetickvaluein, (450,0))
     screenin.blit(textplayin, (500,700))
 
-def infocar2(screenin, readvel2, readbrake2, readthrottle2, readsteer2, readgear2, colorin, fontin, textinfcar2in, i):
-    """Info about car2 on screen"""
-    screenin.blit(textinfcar2in, (0,240))
-    textspeed = fontin.render(f"Speed: {readvel2[i]}", False, colorin)
-    screenin.blit(textspeed, (0,260))
-    textbrake = fontin.render(f"Brake: {readbrake2[i]}", False, colorin)
-    screenin.blit(textbrake, (0,280))
-    textthrottle = fontin.render(f"Throttle: {readthrottle2[i]}", False, colorin)
-    screenin.blit(textthrottle, (0,300))
-    if readsteer2[i] < 0:
-        textsteer = fontin.render(f"Steer: L {readsteer2[i]:.1f}", False, colorin)
-    elif readsteer2[i] > 0:
-        textsteer = fontin.render(f"Steer: R {readsteer2[i]:.1f}", False, colorin)
-    else:
-        textsteer = fontin.render(f"Steer: {readsteer2[i]:.1f}", False, colorin)
-    screenin.blit(textsteer, (0,320))
-    if readgear2[i] == 0:
-        textgear = fontin.render("Gear: N", False, colorin)
-    elif readgear2[i] == -1:
-        textgear = fontin.render("Gear: R", False, colorin)
-    else:
-        textgear = fontin.render(f"Gear: {readgear2[i]}", False, colorin)
-    screenin.blit(textgear, (0,340))
-
-def infocar1(screenin, readvel, readbrake, readthrottle, readsteer, readgear, colorin, fontin, textinfcar1in, i):
+def infocar(pos, screenin, data, colorin, fontin, textinfcar1in, i):
     """Info about car1 on screen"""
-    screenin.blit(textinfcar1in, (0,80))
-    textspeed = fontin.render(f"Speed: {readvel[i]}", False, colorin)
-    screenin.blit(textspeed, (0,100))
-    textbrake = fontin.render(f"Brake: {readbrake[i]}", False, colorin)
-    screenin.blit(textbrake, (0,120))
-    textthrottle = fontin.render(f"Throttle: {readthrottle[i]}", False, colorin)
-    screenin.blit(textthrottle, (0,140))
-    if readsteer[i] < 0:
-        textsteer = fontin.render(f"Steer: L {readsteer[i]:.1f}", False, colorin)
-    elif readsteer[i] > 0:
-        textsteer = fontin.render(f"Steer: R {readsteer[i]:.1f}", False, colorin)
+    screenin.blit(textinfcar1in, (0,pos+80))
+    textspeed = fontin.render(f"Speed: {data['readvel'][i]}", False, colorin)
+    screenin.blit(textspeed, (0,pos+100))
+    textbrake = fontin.render(f"Brake: {data['readbrake'][i]}", False, colorin)
+    screenin.blit(textbrake, (0,pos+120))
+    textthrottle = fontin.render(f"Throttle: {data['readthrottle'][i]}", False, colorin)
+    screenin.blit(textthrottle, (0,pos+140))
+    if data['readsteer'][i] < 0:
+        textsteer = fontin.render(f"Steer: L {data['readsteer'][i]:.1f}", False, colorin)
+    elif data['readsteer'][i] > 0:
+        textsteer = fontin.render(f"Steer: R {data['readsteer'][i]:.1f}", False, colorin)
     else:
-        textsteer = fontin.render(f"Steer: {readsteer[i]:.1f}", False, colorin)
-    screenin.blit(textsteer, (0,160))
-    if readgear[i] == 0:
+        textsteer = fontin.render(f"Steer: {data['readsteer'][i]:.1f}", False, colorin)
+    screenin.blit(textsteer, (0,pos+160))
+    if data['readgear'][i] == 0:
         textgear = fontin.render("Gear: N", False, colorin)
-    elif readgear[i] == -1:
+    elif data['readgear'][i] == -1:
         textgear = fontin.render("Gear: R", False, colorin)
     else:
-        textgear = fontin.render(f"Gear: {readgear[i]}", False, colorin)
-    screenin.blit(textgear, (0,180))
+        textgear = fontin.render(f"Gear: {data['readgear'][i]}", False, colorin)
+    screenin.blit(textgear, (0,pos+180))
 
-def rightleftclickordrawagain(screenin, readx, ready, readx2, ready2, image1, image2, center_origin, center_origin2, i):
+def rightleftclickordrawagain(screenin, data1, data2, image1, image2, center_origin, center_origin2, i):
     """Draw path and car on right or left click"""
     for j in range(0, i):
         if j != i-1:
-            screenin.blit(image2, center_origin([readx[j], ready[j]]))
-            screenin.blit(image2, center_origin2([readx2[j], ready2[j]]))
+            screenin.blit(image2, center_origin([data1['readx'][j], data1['ready'][j]]))
+            screenin.blit(image2, center_origin2([data2['readx'][j], data2['ready'][j]]))
         else:
-            screenin.blit(image1, center_origin([readx[j], ready[j]]))
-            screenin.blit(tint(image1,(124,252,0)), center_origin2([readx2[j], ready2[j]]))
+            screenin.blit(image1, center_origin([data1['readx'][j], data1['ready'][j]]))
+            screenin.blit(tint(image1,(124,252,0)), center_origin2([data2['readx'][j], data2['ready'][j]]))
 
-def drawcar(screenin, readx, ready, readx2, ready2, image1, center_origin, center_origin2, i):
+def drawcar(screenin, data1, data2, image1, center_origin, center_origin2, i):
     """Draw car"""
-    screenin.blit(image1, center_origin([readx[i], ready[i]]))
-    screenin.blit(tint(image1,(124,252,0)), center_origin2([readx2[i], ready2[i]]))
+    screenin.blit(image1, center_origin([data1['readx'][i], data1['ready'][i]]))
+    screenin.blit(tint(image1,(124,252,0)), center_origin2([data2['readx'][i], data2['ready'][i]]))
 
-def drawpath(screenin, readx, ready, readx2, ready2, image2, center_origin, center_origin2, i):
+def drawpath(screenin, data1, data2, image2, center_origin, center_origin2, i):
     """Draw path"""
-    screenin.blit(image2, center_origin([readx[i], ready[i]]))
-    screenin.blit(image2, center_origin2([readx2[i], ready2[i]]))
+    screenin.blit(image2, center_origin([data1['readx'][i], data1['ready'][i]]))
+    screenin.blit(image2, center_origin2([data2['readx'][i], data2['ready'][i]]))
 
 def screenfill(screenin):
     """Clear screen"""

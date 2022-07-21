@@ -1,4 +1,7 @@
 """Init dre2 file - Select zip file | Read zip | Read images | Center images"""
+# pylint: disable=no-member
+# Up line to ignore pygame
+# pylint: disable=line-too-long
 import tkinter as tk
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
@@ -14,10 +17,9 @@ def select_files():
     )
     filenames = fd.askopenfilenames(
         title='Open files',
-        initialdir='/AtualFolder', # um nome qualquer leva para a pasta onde esta a ser executado o ficheiro py
+        initialdir='/AtualFolder', #um nome qualquer leva para pasta de execução do ficheiro
         filetypes=filetypes)
     return filenames
-
 
 def okfiles():
     """OK FILES"""
@@ -50,11 +52,10 @@ def okfiles():
             )
 
 
-def readfile1():
+def readfile(filesname):
     """Read first excel"""
-    readexcel = pd.read_excel(FILESLIST[0]) #Ficheiro Excel a ser li-do
-    data1 = {}
-    data1 = {
+    readexcel = pd.read_excel(filesname) #Ficheiro Excel a ser li-do
+    data = {
         "readx": list(readexcel['Position_X']),
         "ready": list(readexcel['Position_Y']),
         "readvel": list(readexcel['Speed']),
@@ -64,24 +65,8 @@ def readfile1():
         "readsteer": list(readexcel['Steer']),
         "readgear": list(readexcel['Gear'])
     }
-    #data[readbrake]
-    return data1
+    return data
 
-def readfile2():
-    """Read second excel"""
-    readexcel2 = pd.read_excel(FILESLIST[1]) #Ficheiro Excel a ser li-do
-    data2 = {}
-    data2 = {
-        "readx2": list(readexcel2['Position_X']),
-        "ready2": list(readexcel2['Position_Y']),
-        "readvel2": list(readexcel2['Speed']),
-        "readbrake2": list(readexcel2['Brake']),
-        "readthrottle2": list(readexcel2['Throttle']),
-        "readtick2": list(readexcel2['Tick']),
-        "readsteer2": list(readexcel2['Steer']),
-        "readgear2": list(readexcel2['Gear'])
-    }
-    return data2
 
 def readimages():
     """Read images"""
@@ -103,8 +88,8 @@ FILESLIST = okfiles()
 AGAIN = True
 while AGAIN is True:
     try:
-        data1input = readfile1()
-        data2input = readfile2()
+        data1input = readfile(FILESLIST[0])
+        data2input = readfile(FILESLIST[1])
         AGAIN = False
         pygame.init()
         screen = pygame.display.set_mode([1280, 720], 0, 32)
