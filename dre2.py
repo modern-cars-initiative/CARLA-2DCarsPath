@@ -139,8 +139,11 @@ def loop():
                     elif addplay > totaltick:
                         # Quando o play chega ao valor final
                         addplay = data1input["readtick1"][-1]-1
+                        i = addplay
                         play = False
+                        multplay = 1
                         screenfill(screen)
+                        rightleftclickordrawagain(screen, data1input, data2input, image1, image2, center_origin, center_origin2, i)
                 # Ir para o modo do trajeto completo
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_DOWN:
