@@ -40,11 +40,10 @@ def okfiles():
                             zips.extractall(".")
                         root.destroy()
                         return zipfiles
-                    else:
-                        showinfo(
-                            title='Selected Files',
-                            message="You only can choose a ZIP file!"
-                        )
+                    showinfo(
+                        title='Selected Files',
+                        message="You only can choose a ZIP file!"
+                    )
         else:
             showinfo(
                 title='Selected Files',
