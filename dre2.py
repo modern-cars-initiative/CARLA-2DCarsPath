@@ -4,16 +4,28 @@
 # pylint: disable=line-too-long
 import shutil
 import pygame
-from initdre2 import image1, image2, center_origin, center_origin2, data1input, data2input
-from funcdre2 import screenfill, rightleftclickordrawagain, drawcar, drawpath, textmult, screendistance, infoscreen, forplay, distancemouseclick, playspeed, textchangespeedmodplay, infocar
-from funcdre2 import screen, textstop
-from funcdre2 import color, font, textinfcar1, textinfcar2, textinfocontroltick, textchangetickvalue, textmode, textplay
+from initdre2 import okfiles, readimages, centerimages, verifyfiles
+from funcdre2 import screenfill, rightleftclickordrawagain, drawcar, drawpath, textmult, screendistance, infoscreen, forplay, distancemouseclick, playspeed
+from funcdre2 import pygamestringstyles, textonscreen, textchangespeedmodplay, infocar
 
 # Keypress dentro do for pygame.event.get() so avaça mais um mesmo que a tecla continue precionada
 # Keypress fora do for avança muitos valores de uma vez
+
+# Choose/verify file
+fileslist = okfiles()
+data1input, data2input = verifyfiles(fileslist)
+
 def loop():
     """Main code"""
     try:
+        # Pygame screen
+        pygame.init()
+        screen = pygame.display.set_mode([1280, 720], 0, 32)
+        color, font = pygamestringstyles()
+        textmode, textinfcar1, textinfcar2, textinfocontroltick, textchangetickvalue, textplay, textstop = textonscreen(color, font)
+        image1, image2 = readimages()
+        center_origin, center_origin2 = centerimages(screen)
+
         # Control vars
         totaltick = data1input["readtick1"][-1]
         multtick = 1
@@ -131,8 +143,8 @@ def loop():
                     forplay(screen, data1input, data2input, image1, image2, center_origin, center_origin2, addplay)
                     addplay += multplay
                     i = addplay
-                    playspeed(multplay)
-                    textchangespeedmodplay()
+                    playspeed(multplay,screen, color, font)
+                    textchangespeedmodplay(screen, color, font)
                     if addplay == totaltick:
                         screen.fill((0, 0, 0))
                         rightleftclickordrawagain(screen, data1input, data2input, image1, image2, center_origin, center_origin2, i)

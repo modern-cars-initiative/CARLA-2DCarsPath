@@ -43,7 +43,7 @@ def textmult(screenin, colorin, fontin, totaltick, multtick, i):
         texttick = fontin.render(f"Tick x4: {i}/{totaltick-1}", False, colorin)
         screenin.blit(texttick, (0,40))
 
-def playspeed(multplay):
+def playspeed(multplay,screen,color,font):
     """Change text of speed play"""
     if multplay == 1:
         textspeed = font.render("Speed: 1x", False, color)
@@ -55,7 +55,7 @@ def playspeed(multplay):
         textspeed = font.render("Speed: 7x", False, color)
         screen.blit(textspeed, (0,40))
 
-def textchangespeedmodplay():
+def textchangespeedmodplay(screen,color,font):
     """Text speed"""
     textchangespeedvalue = font.render("Click on 1 -> Speed x1 | Click on 3 -> Speed x3 | Click on 7 -> Speed x7", False, color)
     screen.blit(textchangespeedvalue, (0, 0))
@@ -143,8 +143,3 @@ def drawpath(screenin, data1, data2, image2, center_origin, center_origin2, i):
 def screenfill(screenin):
     """Clear screen"""
     screenin.fill((0,0,0))
-
-pygame.init()
-screen = pygame.display.set_mode([1280, 720], 0, 32)
-color, font = pygamestringstyles()
-textmode, textinfcar1, textinfcar2, textinfocontroltick, textchangetickvalue, textplay, textstop = textonscreen(color, font)
