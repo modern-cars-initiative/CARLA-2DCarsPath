@@ -7,7 +7,7 @@ class TestDic(unittest.TestCase):
     """Test"""
 
     def setUp(self) -> None:
-        self.data1input, self.data2input = verifyfiles(['ZIP/DadosCarro86_2022-07-15_09:41:32.xlsx', 'ZIP/DadosCarro87_2022-07-15_09:41:32.xlsx'])
+        self.data1input, self.data2input = verifyfiles(['filestotest/DadosCarro86_2022-07-15_09:41:32.xlsx', 'filestotest/DadosCarro87_2022-07-15_09:41:32.xlsx'])
 
     def testdic1(self):
         """Test"""
