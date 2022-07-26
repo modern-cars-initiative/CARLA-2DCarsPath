@@ -45,4 +45,4 @@ jobs:
       shell: sh
     - name: Analysing the code with pylint
       run: |
-        pylint -d C0303,R0913,C0103,R1702,R0912,R0915,R1705,C3001 $(git ls-files '*.py')
+        pylint -d C0303,R0913,C0103,R1702,R0912,R0915,R1705,C3001,R0914 $(git ls-files '*.py')
