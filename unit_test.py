@@ -27,11 +27,14 @@ class TestDic(unittest.TestCase):
 
     def testlendic(self):
         """Test"""
-        if len(self.data1input) and len(self.data2input) == 8:
-            resultdic = True
-        else:
-            resultdic = False
-        self.assertEqual(resultdic, True)
+        len1 = len(self.data1input)
+        len2 = len(self.data2input)
+
+        test1 = len1 and len2 == 8
+        test2 = not test1
+
+        self.assertEqual(test1, True)
+        self.assertEqual(test2, False)
 
     def testsamelendic(self):
         """Test"""
