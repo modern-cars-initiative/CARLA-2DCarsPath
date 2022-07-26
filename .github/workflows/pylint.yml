@@ -1,0 +1,48 @@
+name: Pylint
+
+on: 
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+    - name: Python version
+      run: |
+        python3.7 --version
+    - name: pygame
+      run: |
+        python3.7 -m pip install -U pygame==1.9.6 --user
+    - name: pandas
+      run: |
+        python3.7 -m pip install -U pandas --user
+    - name: tkinter
+      run: |
+        pip install tk
+    - name: requirements
+      run: |
+        python3.7 -m pip install -r requirements.txt
+    - name: unit test
+      run: |
+        python3.7 -m unittest unit_test.py
+      shell: sh
+    - name: Analysing the code with pylint
+      run: |
+        pylint -d C0303,R0913,C0103,R1702,R0912,R0915,R1705,C3001 $(git ls-files '*.py')
