@@ -11,10 +11,6 @@ from funcdre2 import pygamestringstyles, textonscreen, textchangespeedmodplay, i
 # Keypress dentro do for pygame.event.get() so avaça mais um mesmo que a tecla continue precionada
 # Keypress fora do for avança muitos valores de uma vez
 
-# Choose/verify file
-fileslist = okfiles()
-data1input, data2input = verifyfiles(fileslist)
-
 def loop():
     """Main code"""
     try:
@@ -168,4 +164,7 @@ def loop():
         shutil.rmtree("tmp", ignore_errors=False, onerror=None)
 
 if __name__ == '__main__':
+    # Choose/verify file
+    fileslist = okfiles()
+    data1input, data2input = verifyfiles(fileslist)
     loop()
